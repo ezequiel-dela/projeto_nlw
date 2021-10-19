@@ -44,6 +44,24 @@ class ConnectionsService {
 
         return connections; 
     }
+
+    async findBySocketID (socket_id: string) {
+        const connection = await this.ConnectionRepository.findOne({
+            socket_id,
+        });
+
+        return connection;
+    }
+
+    async updateAdminID(user_id: string, admin_id: string){
+        const connections = await this.ConnectionRepository
+        .createQueryBuilder().
+        update(Connection)
+        .set({admin_id})
+        .where("user_id = :user_id", {
+            user_id
+        }).execute();
+    }
 }
 
 export { ConnectionsService }
