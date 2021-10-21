@@ -1,0 +1,1 @@
+listagem de users some pois no primeiro acesso o programa seta o admin_id

@@ -2,11 +2,11 @@ import { io } from "../http";
 import { ConnectionsService } from "../services/ConnectionsService";
 import { MessagesService } from "../services/MessagesService";
 
-io.on("connect", async (socket) => {
-    const connectionService = new ConnectionsService();
+io.on("connect", async(socket) => {
+    const connectionsService = new ConnectionsService();
     const messagesService = new MessagesService();
 
-    const allConnectionsWithoutAdmin = await connectionService.findAllWithoutAdmin();
+    const allConnectionsWithoutAdmin = await connectionsService.findAllWithoutAdmin();
 
     io.emit("admin_list_all_users", allConnectionsWithoutAdmin);
 
@@ -27,7 +27,7 @@ io.on("connect", async (socket) => {
             admin_id: socket.id,
         });
 
-        const {socket_id } = await connectionService.findByUserId(user_id);
+        const {socket_id } = await connectionsService.findByUserId(user_id);
 
         io.to(socket_id).emit("admin_send_to_client", {
             text,
@@ -37,9 +37,9 @@ io.on("connect", async (socket) => {
 
     socket.on("admin_user_in_support", async params => {
         const { user_id} = params;
-        await connectionService.updateAdminID(user_id, socket.id);
+        await connectionsService.updateAdminID(user_id, socket.id);
 
-        const allConnectionsWithoutAdmin = await connectionService.findAllWithoutAdmin();
+        const allConnectionsWithoutAdmin = await connectionsService.findAllWithoutAdmin();
 
         io.emit("admin_list_all_users", allConnectionsWithoutAdmin);
 

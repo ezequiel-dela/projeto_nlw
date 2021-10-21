@@ -25,7 +25,7 @@ io.on("connect", (socket) => {
 
             await connectionsService.create({
                 socket_id,
-                user_id: user.id
+                user_id: user.id,
             });
 
             user_id = user.id;

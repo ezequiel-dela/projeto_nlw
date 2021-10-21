@@ -1,6 +1,4 @@
 {
-
-   
     "type": "postgres",
     "host": "localhost",
     "port": "5432",
@@ -12,7 +10,7 @@
         "./src/database/migrations/*.ts"
     ],
     "entities": [
-        "./src/entities/**.ts"
+        "./src/entities/**/*.ts"
     ],
     "cli": {
         "migrationsDir": "./src/database/migrations"
