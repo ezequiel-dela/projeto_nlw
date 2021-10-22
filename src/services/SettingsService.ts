@@ -38,7 +38,7 @@ class SettingsService {
 
     async findByUsername(username: string){
         const settings = await this.settingsRepository.findOne({
-            username
+            username,
         });
         return settings;
     }

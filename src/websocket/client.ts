@@ -2,6 +2,7 @@ import {io} from "../http";
 import { ConnectionsService } from "../services/ConnectionsService"
 import { UsersService } from "../services/UsersService";
 import { MessagesService } from "../services/MessagesService";
+import { Connection } from "typeorm";
 
 interface IParams {
     text: string;
@@ -36,9 +37,9 @@ io.on("connect", (socket) => {
             if(!connection) {
                 await connectionsService.create({
                     socket_id,
-                    user_id: userExists.id
+                    user_id: userExists.id,
                 });
-            }else{
+            } else {
                 connection.socket_id = socket_id;
                 await connectionsService.create(connection);
             }
@@ -47,7 +48,13 @@ io.on("connect", (socket) => {
         await messagesService.create({
             text,
             user_id
-        });
+        })
+
+            
+    
+           
+
+        
 
         const allMessages = await messagesService.listByUser(user_id);
 

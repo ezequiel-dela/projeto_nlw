@@ -23,7 +23,7 @@ socket.on("admin_list_all_users", (connections) => {
 function call(id) {
 
     const connection = connectionsUsers.find(connection => connection.socket_id === id
-    );
+);
     const template = document.getElementById("admin_template").innerHTML;
 
     const rendered = Mustache.render(template, {
@@ -71,7 +71,7 @@ function call(id) {
 }
 
 function sendMessage(id){
-    const text = document.getElementById(`send_message_${id}`);
+    const text = document.getElementById(`send_message${id}`);
 
     const params = {
         text: text.value,
@@ -93,7 +93,8 @@ function sendMessage(id){
     text.value = "";
 }
 
-socket.on("admin_receive_message", data => {
+socket.on("admin_receive_message", (data) => {
+    console.log(data);
     const connection = connectionsUsers.find(connection => connection.socket_id = data.socket_id);
     const divMessages = document.getElementById(
         `allMessages${connection.user_id}`
@@ -110,5 +111,4 @@ socket.on("admin_receive_message", data => {
                 ).format("DD/MM/YYYY HH:mm:ss")}</span>`; 
 
                 divMessages.appendChild(createDiv);
-
 });
