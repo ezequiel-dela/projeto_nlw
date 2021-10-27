@@ -94,10 +94,10 @@ function sendMessage(id){
 }
 
 socket.on("admin_receive_message", (data) => {
-    console.log(data);
+    //console.log(data.message.user_id);
     const connection = connectionsUsers.find(connection => connection.socket_id = data.socket_id);
     const divMessages = document.getElementById(
-        `allMessages${connection.user_id}`
+        `allMessages${data.message.user_id}`
     );
 
     const createDiv = document.createElement("div");

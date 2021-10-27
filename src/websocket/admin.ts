@@ -35,7 +35,7 @@ io.on("connect", async(socket) => {
         });
     });
 
-    socket.on("admin_user_in_support", async params => {
+    /*socket.on("admin_user_in_support", async params => {
         const { user_id} = params;
         await connectionsService.updateAdminID(user_id, socket.id);
 
@@ -43,5 +43,5 @@ io.on("connect", async(socket) => {
 
         io.emit("admin_list_all_users", allConnectionsWithoutAdmin);
 
-    })
+    })*/
 });
