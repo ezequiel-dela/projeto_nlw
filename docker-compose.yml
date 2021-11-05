@@ -1,10 +1,25 @@
-version: "3.1"
+version: "3.4"
 
 services:
-  app:
-    build: .
-    ports:
-      - "3000:3000"
-    command: yarn start
-
-    
+    db:
+        container_name: projeto_nlw_pg
+        image: postgres
+        ports:
+            - "5432:5432"
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=1308
+            - POSTGRES_DB=Chat
+    app:
+        container_name: projeto_nlw_app
+        build: .
+        ports:
+            - 3000:3000
+        volumes:
+            - ./:/usr/src/app
+        depends_on:
+            - db
+volumes:
+    db-data:
