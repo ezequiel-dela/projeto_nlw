@@ -5,7 +5,7 @@ services:
         container_name: projeto_nlw_pg
         image: postgres
         ports:
-            - "5432:5432"
+            - "5431:5431"
         volumes:
             - db-data:/var/lib/postgresql/data
         environment:
@@ -21,5 +21,19 @@ services:
             - ./:/usr/src/app
         depends_on:
             - db
+    pgadmin:
+        container_name: projeto_nlw_pgadmin
+        image: dpage/pgadmin4
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=meutcc@meutcc.com
+            - PGADMIN_DEFAULT_PASSWORD=meutcc123
+        ports:
+            - '5050:80'
+        restart: always
+        volumes:
+            - pgadmin:/root/.pgadmin
+        logging:
+            driver: none
 volumes:
     db-data:
+    pgadmin:
